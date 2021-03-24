@@ -1,0 +1,9 @@
+Options -Indexes
+DirectoryIndex main.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.(css|js|icon|zip|rar|png|jpg|gif|pdf)$ main.php [L,QSA]
+
+AddType application/x-httpd-php .php .phtml
