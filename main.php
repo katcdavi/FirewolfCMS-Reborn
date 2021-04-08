@@ -19,6 +19,7 @@
     # translator init
 
     # url args
+    $urlArgs = new UrlArgs($conf);
 
     # fcms controller init
 

@@ -25,6 +25,11 @@ final class Config
         return isset($this->dict[$key]) && ($this->dict[$key] === 'True' || $this->dict[$key] === 'true');
     }
 
+    public function isSet(string $key): bool
+    {
+        return isset($this->dict[$key]);
+    }
+
     private function init()
     {
         $content = file_get_contents($this->path);
