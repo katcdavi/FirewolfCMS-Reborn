@@ -1,7 +1,11 @@
 <?php
 
-    function fcms_autoloader($className)
-    {
+    function fcms_autoloader($className) {
+        if (strpos($className, '\\') !== FALSE) {
+            $parts = explode("\\", $className);
+            $className = $parts[count($parts) - 1];
+        }
+
         $searchQuery = DIRECTORY_SEPARATOR."$className.php";
         $baseFolder = ".".DIRECTORY_SEPARATOR."src";
 

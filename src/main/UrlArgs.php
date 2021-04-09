@@ -3,8 +3,6 @@
 namespace FCMS;
 
 
-use http\Exception;
-
 final class UrlArgs
 {
     /** @var string $url */

@@ -1,5 +1,7 @@
 <?php
 
+    namespace FCMS;
+
     # session
     mb_internal_encoding("UTF-8");
     session_start();
@@ -22,6 +24,9 @@
     $urlArgs = new UrlArgs($conf);
 
     # fcms controller init
+    if (!Controller::setup()) {
+        die("[!!!] Controller setup fail!");
+    }
 
     # fcms controller process & render
 
