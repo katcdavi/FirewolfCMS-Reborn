@@ -27,24 +27,37 @@ abstract class Controller
 
     private static $viewSrc = null;
 
+
+    public function getKeywords(): array {
+        return $this->keywords;
+    }
+
     public function setKeywords(array $keywords) {
         $this->keywords = $keywords;
+    }
+
+    public function getTitle(): string {
+        return $this->title;
     }
 
     public function setTitle(string $title) {
         $this->title = $title;
     }
 
+    public function getView(): string {
+        return $this->view;
+    }
+
     public function setView(string $view) {
         $this->view = $view;
     }
 
-    public function setInfo(ControllerInfo $info) {
-        $this->info = $info;
-    }
-
     public function getInfo(): ControllerInfo {
         return $this->info;
+    }
+
+    public function setInfo(ControllerInfo $info) {
+        $this->info = $info;
     }
 
     public abstract function init(UrlArgs $args): bool;
