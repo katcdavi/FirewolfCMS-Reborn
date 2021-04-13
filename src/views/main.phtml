@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><?= $parent->getTitle() ?></title>
+    </head>
+
+    <body>
+        <?php
+            if ($controller !== null) {
+                $controller->render();
+            }
+        ?>
+    </body>
+</html>

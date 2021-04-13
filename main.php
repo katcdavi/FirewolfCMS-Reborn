@@ -27,8 +27,11 @@
     if (!Controller::setup()) {
         die("[!!!] Controller setup fail!");
     }
+    $fcms = new FCMSController();
 
     # fcms controller process & render
+    $fcms->init($urlArgs);
+    $fcms->render();
 
     # config test
     if ($conf->getBool('printClientIp')) {

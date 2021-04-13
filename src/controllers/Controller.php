@@ -7,16 +7,16 @@ namespace FCMS;
 abstract class Controller
 {
     /** @var array $keywords */
-    private $keywords = [];
+    protected $keywords = [];
     /** @var string $view */
-    private $view = '';
+    protected $view = '';
     /** @var string $title */
-    private $title = '';
+    protected $title = '';
     /** @var array $data */
-    private $data = [];
+    protected $data = [];
 
     /** @var ControllerInfo|null */
-    private $info = null;
+    protected $info = null;
 
     const VIEW_LOCATION_INFO = [
         'path' => [
@@ -65,11 +65,14 @@ abstract class Controller
 
     public function render() {
         extract($this->data);
-        require(self::$viewSrc . $this->view . self::VIEW_LOCATION_INFO['suffix']);
+        # make available this controller via variable
+        $parent = $this;
+        require(self::$viewSrc . $this->view . '.' . self::VIEW_LOCATION_INFO['suffix']);
     }
 
     public static function setup(): bool {
         self::$viewSrc = implode(DIRECTORY_SEPARATOR, self::VIEW_LOCATION_INFO['path']);
+        self::$viewSrc .= DIRECTORY_SEPARATOR;
         return true;
     }
 }
