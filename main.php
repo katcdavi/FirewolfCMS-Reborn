@@ -17,6 +17,7 @@
     $conf = new Config();
 
     # session manager init
+    $session = SessionManager::instance();
 
     # translator init
 

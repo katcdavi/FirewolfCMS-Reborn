@@ -12,26 +12,21 @@ final class FCMSController extends Controller
     public function init(UrlArgs $args): bool {
         $controllerName = $args->getNext();
 
-        if ($controllerName !== null) {
-            $controllerName = $this->getControllerName($controllerName);
-            $this->controller = new $controllerName;
-
-            $this->controller->init($args);
-
-            $this->setKeywords($this->controller->getKeywords());
-            $this->setTitle($this->controller->getTitle());
-            $this->setInfo($this->controller->getInfo());
-            $this->setView("main");
-
-            $this->data['controller'] = $this->controller;
-        } else {
-            $this->setKeywords([
-                'fcms'
-            ]);
-            $this->setTitle('FCMS');
-            $this->setInfo(new ControllerInfo('', '', ''));
-            $this->setView("main");
+        if ($controllerName === null) {
+            $controllerName = "home";
         }
+
+        $controllerName = $this->getControllerName($controllerName);
+        $this->controller = new $controllerName;
+
+        $this->controller->init($args);
+
+        $this->setKeywords($this->controller->getKeywords());
+        $this->setTitle($this->controller->getTitle());
+        $this->setInfo($this->controller->getInfo());
+        $this->setView("main");
+
+        $this->data['controller'] = $this->controller;
 
         return true;
     }
@@ -44,7 +39,7 @@ final class FCMSController extends Controller
         $name = str_replace("_", " ", $name);
         $name = ucwords($name);
         $name = str_replace(" ", "", $name);
-        $name = "FCMS\\$name";
+        $name = "FCMS\\{$name}Controller";
         return $name;
     }
 }

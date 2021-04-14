@@ -14,7 +14,7 @@ final class HomeController extends Controller
         $this->setView("home");
         $this->setInfo(new ControllerInfo('', '', ''));
 
-        $this->data['versionStr'] = "v1.0";
+        $this->data['versionStr'] = "v2.0.0";
 
         return true;
     }

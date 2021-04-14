@@ -5,6 +5,10 @@
     </head>
 
     <body>
+        <h1>
+            <?= $controller->getTitle() ?>
+        </h1>
+
         <?php
             if ($controller !== null) {
                 $controller->render();
