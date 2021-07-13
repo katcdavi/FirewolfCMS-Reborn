@@ -5,30 +5,41 @@ namespace FCMS;
 
 final class Config
 {
-    /** @var string $path */
     private $path;
-    /** @var array $dict */
     private $dict;
 
-    public function __construct(string $path = 'config.inc.txt') {
+    private Set $accessedKeys;
+    private OneTimeLog $accessedKeysLog;
+
+    public function __construct(string $path = 'config.inc.txt')
+    {
         $this->path = $path;
         $this->dict = [];
+        $this->accessedKeys = new Set();
+        $this->accessedKeysLog = new OneTimeLog('logs/accessed_config_keys.log');
         $this->init();
     }
 
-    public function get(string $key) {
+    public function get(string $key)
+    {
+        $this->processAccess("[GNRL]", $key);
         return $this->dict[$key] ?? null;
     }
 
-    public function getBool(string $key): bool {
+    public function getBool(string $key): bool
+    {
+        $this->processAccess("[BOOL]", $key);
         return isset($this->dict[$key]) && ($this->dict[$key] === 'True' || $this->dict[$key] === 'true');
     }
 
-    public function isSet(string $key): bool {
+    public function isSet(string $key): bool
+    {
+        $this->processAccess("[SET?]", $key);
         return isset($this->dict[$key]);
     }
 
-    private function init() {
+    private function init()
+    {
         $content = file_get_contents($this->path);
         $content = explode("\r\n", $content);
         $content = array_filter($content, function ($e) {
@@ -47,5 +58,14 @@ final class Config
         }
 
         $this->dict = $dict;
+    }
+
+    private function processAccess(string $prefix, string $key)
+    {
+        $fullKey = $prefix . $key;
+        if (!$this->accessedKeys->isSet($fullKey)) {
+            $this->accessedKeys->insert($fullKey);
+            $this->accessedKeysLog->log($fullKey);
+        }
     }
 }
