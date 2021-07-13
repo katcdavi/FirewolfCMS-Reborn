@@ -1,2 +1,4 @@
 config.inc.txt
 .idea
+logs/*
+!logs/.gitkeep
