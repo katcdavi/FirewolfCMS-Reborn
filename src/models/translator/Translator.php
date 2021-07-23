@@ -7,15 +7,15 @@ namespace FCMS;
 final class Translator
 {
     private string $lang;
+    private Config $config;
 
-    public function __construct(string $lang = null)
+    public function __construct(Config $config, string $lang = null)
     {
-        $conf = ICCBag::conf();
-
         if ($lang === null) {
-            $lang = $conf->get('defaultLang');
+            $lang = $config->get('defaultLang');
         }
 
         $this->lang = (string) $lang;
+        $this->config = $config;
     }
 }

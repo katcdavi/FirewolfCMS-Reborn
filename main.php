@@ -15,14 +15,12 @@
 
     # config init
     $conf = new Config();
-    ICCBag::setConf($conf);
 
     # session manager init
     $session = SessionManager::instance();
 
     # translator init
-    $tr = new Translator();
-    ICCBag::setTr($tr);
+    $tr = new Translator($conf);
 
     # url args
     $urlArgs = new UrlArgs($conf);
