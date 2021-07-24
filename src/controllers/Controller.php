@@ -15,6 +15,9 @@ abstract class Controller
     /** @var array $data */
     protected $data = [];
 
+    protected Config $config;
+    protected Translator $translator;
+
     /** @var ControllerInfo|null */
     protected $info = null;
 
@@ -27,6 +30,10 @@ abstract class Controller
 
     private static $viewSrc = null;
 
+    public function __construct(Config $config, Translator $translator) {
+        $this->config = $config;
+        $this->translator = $translator;
+    }
 
     public function getKeywords(): array {
         return $this->keywords;

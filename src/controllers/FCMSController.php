@@ -9,6 +9,10 @@ final class FCMSController extends Controller
     /** @var Controller|null $controller */
     protected $controller;
 
+    public function __construct(Config $config, Translator $translator) {
+        parent::__construct($config, $translator);
+    }
+
     public function init(UrlArgs $args): bool {
         $controllerName = $args->getNext();
 
@@ -17,7 +21,7 @@ final class FCMSController extends Controller
         }
 
         $controllerName = $this->getControllerName($controllerName);
-        $this->controller = new $controllerName;
+        $this->controller = new $controllerName($this->config, $this->translator);
 
         $this->controller->init($args);
 
