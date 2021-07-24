@@ -6,6 +6,10 @@ namespace FCMS;
 
 final class HomeController extends Controller
 {
+    public function __construct(Config $config, Translator $translator, SessionManager $session) {
+        parent::__construct($config, $translator, $session);
+    }
+
     public function init(UrlArgs $args): bool {
         $this->setKeywords([
             'fcms', 'home', 'main'

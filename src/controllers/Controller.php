@@ -17,6 +17,7 @@ abstract class Controller
 
     protected Config $config;
     protected Translator $translator;
+    protected SessionManager $session;
 
     /** @var ControllerInfo|null */
     protected $info = null;
@@ -30,9 +31,10 @@ abstract class Controller
 
     private static $viewSrc = null;
 
-    public function __construct(Config $config, Translator $translator) {
+    public function __construct(Config $config, Translator $translator, SessionManager $session) {
         $this->config = $config;
         $this->translator = $translator;
+        $this->session = $session;
     }
 
     public function getKeywords(): array {
@@ -71,6 +73,10 @@ abstract class Controller
     public abstract function process(): StatusCode;
 
     public function render() {
+        # add some more data to be extracted and available in templates
+        $this->data['keywordsStr'] = implode(',', $this->getKeywords());
+        $this->data['conf'] = $this->config;
+
         extract($this->data);
         # make available this controller via variable
         $parent = $this;

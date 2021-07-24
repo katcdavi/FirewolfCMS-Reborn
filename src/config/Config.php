@@ -22,18 +22,21 @@ final class Config
 
     public function get(string $key)
     {
+        $key = strtolower($key);
         $this->processAccess("[GNRL]", $key);
         return $this->dict[$key] ?? null;
     }
 
     public function getBool(string $key): bool
     {
+        $key = strtolower($key);
         $this->processAccess("[BOOL]", $key);
         return isset($this->dict[$key]) && ($this->dict[$key] === 'True' || $this->dict[$key] === 'true');
     }
 
     public function isSet(string $key): bool
     {
+        $key = strtolower($key);
         $this->processAccess("[SET?]", $key);
         return isset($this->dict[$key]);
     }
@@ -54,7 +57,7 @@ final class Config
                 throw new \Exception("Syntax error in config file");
             }
 
-            $dict[trim($data[0])] = trim($data[1]);
+            $dict[strtolower(trim($data[0]))] = trim($data[1]);
         }
 
         $this->dict = $dict;

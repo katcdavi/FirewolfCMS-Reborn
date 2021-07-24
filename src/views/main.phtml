@@ -11,6 +11,28 @@
             <?= $controller->getTitle() ?>
         </h1>
 
+        <h2>
+            <?= $session_successMessage ?>
+        </h2>
+        <h2>
+            <?= $session_infoMessage ?>
+        </h2>
+        <h2>
+            <?= $session_errorMessage ?>
+        </h2>
+
+        <?php if ($conf->getBool('DEBUG')): ?>
+            <h2>
+                Controller Info
+            </h2>
+            <div>
+                <p>Keywords: <?= $keywordsStr ?></p>
+                <p>Title: <?= $parent->getTitle() ?></p>
+                <p>View: <?= $parent->getView() ?></p>
+                <p>Info: <?= $parent->getInfo() ?></p>
+            </div>
+        <?php endif; ?>
+
         <?php
             if ($controller !== null) {
                 $controller->render();

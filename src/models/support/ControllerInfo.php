@@ -30,4 +30,11 @@ final class ControllerInfo
     public function getUrl(): string {
         return $this->url;
     }
+
+    public function __toString(): string {
+        $title = $this->title;
+        $permission = $this->permission;
+        $url = $this->url;
+        return "[ title => '$title', permission => '$permission', url => '$url' ]";
+    }
 }

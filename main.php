@@ -29,7 +29,7 @@
     if (!Controller::setup()) {
         die("[!!!] Controller setup fail!");
     }
-    $fcms = new FCMSController($conf, $tr);
+    $fcms = new FCMSController($conf, $tr, $session);
 
     # fcms controller process & render
     $fcms->init($urlArgs);
